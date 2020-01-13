@@ -97,7 +97,7 @@ func TestProgressBarRender(t *testing.T) {
 		t.Run(tc.expected, func(t *testing.T) {
 			pbar := New(tc.options...)
 			assert.NotNil(t, pbar)
-			assert.Equal(t, tc.expected, pbar.Render(0, nil))
+			assert.Equal(t, tc.expected, pbar.Render(false, 0, nil))
 		})
 	}
 }
@@ -123,7 +123,7 @@ func TestProgressBarRenderPaddingMaxLeft(t *testing.T) {
 		t.Run(tc.left, func(t *testing.T) {
 			pbar := New(WithLeft(func() string { return tc.left }))
 			assert.NotNil(t, pbar)
-			assert.Equal(t, tc.expected, pbar.Render(tc.maxLen, nil))
+			assert.Equal(t, tc.expected, pbar.Render(false, tc.maxLen, nil))
 		})
 	}
 }

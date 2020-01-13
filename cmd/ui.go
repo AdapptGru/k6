@@ -80,7 +80,7 @@ func printBar(bar *pb.ProgressBar, rightText string, logger *logrus.Logger) {
 		// TODO: check for cross platform support
 		end = "\x1b[0K\r"
 	}
-	fprintf(stdout, "%s %s%s", bar.Render(0, logger), rightText, end)
+	fprintf(stdout, "%s %s%s", bar.Render(stdout.IsTTY, 0, logger), rightText, end)
 }
 
 func renderMultipleBars(isTTY, goBack bool, leftMax int, pbs []*pb.ProgressBar,
@@ -95,7 +95,7 @@ func renderMultipleBars(isTTY, goBack bool, leftMax int, pbs []*pb.ProgressBar,
 	result := make([]string, pbsCount+2)
 	result[0] = lineEnd // start with an empty line
 	for i, pb := range pbs {
-		result[i+1] = pb.Render(leftMax, logger) + lineEnd
+		result[i+1] = pb.Render(isTTY, leftMax, logger) + lineEnd
 	}
 	if isTTY && goBack {
 		// Go back to the beginning
